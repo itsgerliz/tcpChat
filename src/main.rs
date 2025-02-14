@@ -13,6 +13,17 @@ struct CliArgs {
     port: u16
 }
 
+#[repr(u8)]
+enum OpCode {
+    Hello = 0x01,
+    HelloAck = 0x02,
+    Login = 0x03,
+    SessionInfo = 0x04,
+    LoginError = 0x05,
+    Synchronize = 0x06,
+    SessionTerminate = 0x07
+}
+
 fn main() {
     // Default logging level to INFO
     env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
