@@ -8,6 +8,8 @@ authors = ["itsgerliz"]
 
 [dependencies]
 clap = { version = "4.5.29", features = ["derive"] }
+env_logger = "0.11.6"
+log = "0.4.25"
 
 [profile.release-stripped]
 inherits = "release"
