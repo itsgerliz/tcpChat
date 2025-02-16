@@ -40,7 +40,7 @@ struct Listener {
 
 struct Stream {
     inner: TcpStream,
-    address: SocketAddr
+    address: Option<SocketAddr>
 }
 
 fn main() {
@@ -57,5 +57,6 @@ fn main() {
         client::init(&socket);
     } else {
         // Launch server side
+        todo!()
     }
 }
