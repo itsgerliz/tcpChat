@@ -24,6 +24,13 @@ enum OpCode {
     SessionTerminate = 0x07
 }
 
+struct TcpChatMessage {
+    version: u8,
+    opcode: OpCode,
+    payload_size: u16,
+    payload: [u8; 512]
+}
+
 fn main() {
     // Default logging level to INFO
     env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
