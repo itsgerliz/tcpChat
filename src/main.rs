@@ -5,6 +5,9 @@ use std::net::{SocketAddr, TcpListener, TcpStream};
 
 mod client;
 
+pub(crate) const H_VERSION: u8 = 0x01;
+pub(crate) const H_SIZE: u16 = 516;
+
 #[derive(Parser)]
 #[command(version, about)]
 struct CliArgs {
@@ -25,13 +28,6 @@ enum OpCode {
     LoginError = 0x05,
     Synchronize = 0x06,
     SessionTerminate = 0x07
-}
-
-struct TcpChatMessage {
-    version: u8,
-    opcode: OpCode,
-    payload_size: u16,
-    payload: Option<[u8; 512]>
 }
 
 struct Listener {
