@@ -1,6 +1,9 @@
 use clap::Parser;
 use env_logger::Env;
 use log::debug;
+use std::net::{SocketAddr, TcpListener, TcpStream};
+
+mod client;
 
 #[derive(Parser)]
 #[command(version, about)]
@@ -28,7 +31,16 @@ struct TcpChatMessage {
     version: u8,
     opcode: OpCode,
     payload_size: u16,
-    payload: [u8; 512]
+    payload: Option<[u8; 512]>
+}
+
+struct Listener {
+    inner: TcpListener
+}
+
+struct Stream {
+    inner: TcpStream,
+    address: SocketAddr
 }
 
 fn main() {
@@ -37,6 +49,13 @@ fn main() {
     
     // Parse arguments
     let args = CliArgs::parse();
+    let socket = (args.address.as_str(), args.port);
 
     debug!("Starting tcpChat...");
+    if args.listening == false {
+        // Launch client side
+        client::init(&socket);
+    } else {
+        // Launch server side
+    }
 }
